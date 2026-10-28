@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0c0d10">
+<title>WANDERER — Car Collector</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+<style>
+:root{--bg:#0c0d10;--panel:#15171c;--panel2:#1d2027;--text:#f3f4f6;--muted:#9298a5;--line:#2a2e37;--accent:#c7ff4a;--red:#ff5b67;--blue:#78b9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#20232b 0,#0c0d10 50%);color:var(--text);font:15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}button{font:inherit;border:0;cursor:pointer;color:inherit}.app{max-width:540px;margin:auto;padding:16px 14px 92px}.top{display:flex;justify-content:space-between;align-items:center;margin:4px 0 18px}.brand{font-weight:900;letter-spacing:2px;font-size:18px}.brand span{color:var(--accent)}.pill{background:#242832;border:1px solid #343945;border-radius:99px;padding:8px 11px;font-weight:700;font-size:13px}.hero{background:linear-gradient(135deg,#20242b,#121419);border:1px solid #343943;border-radius:20px;padding:18px;position:relative;overflow:hidden;margin-bottom:16px}.eyebrow{font-size:11px;color:var(--accent);font-weight:800;letter-spacing:2px}.hero h1{font-size:25px;line-height:1.08;margin:8px 0}.hero p{color:var(--muted);font-size:13px;margin:8px 0 14px;max-width:300px}.hero-art{font-size:76px;position:absolute;right:-3px;bottom:3px;filter:drop-shadow(0 12px 14px #0008);transform:rotate(-9deg)}.btn{border-radius:12px;padding:12px 14px;background:var(--accent);color:#11140a;font-weight:850;width:100%}.btn.secondary{background:#292d36;color:var(--text);border:1px solid #393e49}.btn.small{padding:9px 11px;font-size:12px}.section-head{display:flex;justify-content:space-between;align-items:center;margin:20px 2px 10px}.section-head h2{font-size:17px;margin:0}.muted{color:var(--muted);font-size:12px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:14px}.stat{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px}.stat strong{display:block;font-size:18px}.stat span{color:var(--muted);font-size:11px}.nav{position:fixed;z-index:5;bottom:0;left:0;right:0;background:#101116f2;backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;justify-content:center;padding:9px 5px calc(9px + env(safe-area-inset-bottom))}.nav-inner{display:grid;grid-template-columns:repeat(4,1fr);max-width:540px;width:100%;gap:5px}.nav button{background:transparent;color:var(--muted);font-size:11px;padding:7px 2px;border-radius:10px}.nav button.active{background:#272b32;color:var(--accent)}.nav b{display:block;font-size:19px;margin-bottom:2px}.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.car-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;overflow:hidden;min-width:0}.car-art{height:100px;display:flex;align-items:center;justify-content:center;font-size:55px;background:radial-gradient(ellipse at center,#343946,#191b21 70%);position:relative}.rarity{position:absolute;top:8px;left:8px;border-radius:6px;padding:4px 6px;font-size:9px;font-weight:900;letter-spacing:.5px;background:#30343d}.rarity.Rare{color:var(--blue)}.rarity.Epic{color:#c7a1ff}.rarity.Legendary{color:var(--accent)}.car-info{padding:10px}.car-info h3{font-size:13px;margin:0 0 4px}.car-info p{font-size:11px;color:var(--muted);margin:0 0 9px}.price{font-weight:850;font-size:13px}.car-info .btn{margin-top:9px}.screen{display:none}.screen.active{display:block}.case{border:1px solid #3b414d;background:linear-gradient(145deg,#252a33,#14161b);border-radius:20px;padding:20px;text-align:center}.case-icon{font-size:86px;line-height:1.2;margin:5px}.case h2{margin:8px 0 4px}.case p{color:var(--muted);font-size:13px}.drop-result{display:none;margin-top:14px;padding:14px;background:#1d2228;border:1px solid var(--accent);border-radius:14px}.drop-result.show{display:block}.big-car{font-size:66px}.list{display:flex;flex-direction:column;gap:9px}.row-item{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);padding:11px;border-radius:13px}.row-item .emoji{font-size:30px}.row-item .details{flex:1;min-width:0}.row-item strong{font-size:13px;display:block}.row-item small{color:var(--muted);font-size:11px}.row-item .btn{width:auto}.empty{text-align:center;color:var(--muted);padding:30px 10px;background:var(--panel);border:1px dashed var(--line);border-radius:15px}.task{display:flex;align-items:center;gap:12px}.task .details{flex:1}.toast{position:fixed;top:14px;left:50%;transform:translateX(-50%);background:#f3f4f6;color:#111;padding:10px 16px;border-radius:12px;font-weight:750;font-size:13px;z-index:10;display:none;box-shadow:0 6px 24px #0007}.toast.show{display:block}.hint{font-size:11px;color:var(--muted);margin-top:12px;line-height:1.5}
+</style>
+</head>
+<body>
+<div class="app">
+ <header class="top"><div class="brand">WANDER<span>ER</span></div><div class="pill">◈ <span id="balance">1,500</span> CR</div></header>
+ <section id="home" class="screen active">
+  <div class="hero"><div class="eyebrow">YOUR GARAGE. YOUR LEGACY.</div><h1>Собери коллекцию,<br>которую запомнят.</h1><p>Открывай кейсы, охоться за редкими экземплярами и следи за рынком JDM.</p><button class="btn" onclick="showScreen('cases')">Открыть кейс · 500 CR</button><div class="hero-art">🏎️</div></div>
+  <div class="stats"><div class="stat"><strong id="ownedCount">0</strong><span>Машин в коллекции</span></div><div class="stat"><strong id="collectionValue">0</strong><span>Стоимость · CR</span></div><div class="stat"><strong id="rareCount">0</strong><span>Редких машин</span></div></div>
+  <div class="section-head"><h2>Недавно добавлены</h2><button class="muted" onclick="showScreen('collection')">Все →</button></div><div id="recentCars" class="cards"></div>
+  <p class="hint">Демо-версия: прогресс хранится в этом браузере. Для реальной игры с другими игроками понадобится сервер и база данных.</p>
+ </section>
+ <section id="collection" class="screen"><div class="section-head"><h2>Моя коллекция</h2><span class="muted" id="collectionLabel">0 машин</span></div><div id="collectionCars" class="cards"></div></section>
+ <section id="cases" class="screen"><div class="section-head"><h2>Автомобильные кейсы</h2><span class="muted">Шанс зависит от редкости</span></div><div class="case"><div class="eyebrow">JDM STARTER DROP</div><div class="case-icon">📦</div><h2>Street Case</h2><p>Одна случайная машина. Может попасться легендарный экземпляр.</p><div class="stats"><div class="stat"><strong>60%</strong><span>Common</span></div><div class="stat"><strong>25%</strong><span>Rare</span></div><div class="stat"><strong>15%</strong><span>Epic / Legend</span></div></div><button class="btn" onclick="openCase()">Открыть за 500 CR</button><div id="dropResult" class="drop-result"></div></div><p class="hint">Шансы в демо упрощены для тестирования. Покупки за реальные деньги не подключены.</p></section>
+ <section id="market" class="screen"><div class="section-head"><h2>Рынок игроков</h2><span class="muted">Демо-предложения</span></div><div id="marketCars" class="list"></div><p class="hint">Пока рынок имитирует предложения. В многопользовательской версии сделки будут проходить на сервере, чтобы избежать дублирования машин и подмены цен.</p></section>
+ <section id="tasks" class="screen"><div class="section-head"><h2>Задания коллекционера</h2><span class="muted">Обновление скоро</span></div><div class="list" id="taskList"></div></section>
+</div>
+<nav class="nav"><div class="nav-inner"><button class="active" data-screen="home" onclick="showScreen('home')"><b>⌂</b>Главная</button><button data-screen="collection" onclick="showScreen('collection')"><b>▦</b>Коллекция</button><button data-screen="cases" onclick="showScreen('cases')"><b>▣</b>Кейсы</button><button data-screen="market" onclick="showScreen('market')"><b>⇄</b>Рынок</button></div></nav>
+<div id="toast" class="toast"></div>
+<script>
+const cars=[
+{id:'civic',name:'Honda Civic Type R EK9',year:1997,rarity:'Common',value:350,emoji:'🚗',desc:'Лёгкая легенда 90-х'},
+{id:'silvia',name:'Nissan Silvia S14',year:1996,rarity:'Common',value:450,emoji:'🏎️',desc:'Классика заднего привода'},
+{id:'integra',name:'Acura Integra Type R',year:1998,rarity:'Rare',value:900,emoji:'🚘',desc:'Высокооборотный характер'},
+{id:'rx7',name:'Mazda RX-7 FD3S',year:2002,rarity:'Rare',value:1300,emoji:'🏎️',desc:'Роторная икона'},
+{id:'s15',name:'Nissan Silvia S15 Spec-R',year:2002,rarity:'Epic',value:2400,emoji:'🚗',desc:'Последняя Silvia'},
+{id:'supra',name:'Toyota Supra RZ',year:1998,rarity:'Epic',value:3000,emoji:'🏎️',desc:'Легенда турбо-эры'},
+{id:'r34',name:'Nissan Skyline GT-R R34',year:2002,rarity:'Legendary',value:7500,emoji:'🚙',desc:'Икона поколения'},
+{id:'z_tune',name:'Nismo Skyline R34 Z-Tune',year:2005,rarity:'Legendary',value:18000,emoji:'🏁',desc:'Ультраредкая специальная версия'}
+];
+const initial={balance:1500,owned:[],market:[{carId:'rx7',price:1600},{carId:'integra',price:1000},{carId:'s15',price:2700},{carId:'silvia',price:500}],tasks:[]};
+let state;try{state=JSON.parse(localStorage.getItem('jdmVaultSave'))||initial}catch(e){state=initial}
+function save(){localStorage.setItem('jdmVaultSave',JSON.stringify(state));render()}
+function fmt(n){return n.toLocaleString('ru-RU')}
+function toast(s){const t=document.getElementById('toast');t.textContent=s;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2100)}
+function carBy(id){return cars.find(c=>c.id===id)}
+function card(c,idx){return `<article class="car-card"><div class="car-art"><span class="rarity ${c.rarity}">${c.rarity.toUpperCase()}</span>${c.emoji}</div><div class="car-info"><h3>${c.name}</h3><p>${c.year} · ${c.desc}</p><div class="price">${fmt(c.value)} CR</div><p>Оценка рынка</p></div></article>`}
+function render(){
+ document.getElementById('balance').textContent=fmt(state.balance);
+ document.getElementById('ownedCount').textContent=state.owned.length;
+ document.getElementById('collectionLabel').textContent=state.owned.length+' машин';
+ const value=state.owned.reduce((sum,id)=>sum+carBy(id).value,0);
+ document.getElementById('collectionValue').textContent=fmt(value);
+ document.getElementById('rareCount').textContent=state.owned.filter(id=>['Epic','Legendary'].includes(carBy(id).rarity)).length;
+ const owned=state.owned.map(id=>carBy(id));
+ document.getElementById('recentCars').innerHTML=owned.length?owned.slice(-2).reverse().map(card).join(''):'<div class="empty" style="grid-column:1/-1">Пока пусто. Открой первый кейс и найди свою первую машину.</div>';
+ document.getElementById('collectionCars').innerHTML=owned.length?owned.slice().reverse().map(card).join(''):'<div class="empty" style="grid-column:1/-1">Коллекция ждёт свою первую легенду 🏁</div>';
+ document.getElementById('marketCars').innerHTML=state.market.map((offer,i)=>{const c=carBy(offer.carId);return `<div class="row-item"><div class="emoji">${c.emoji}</div><div class="details"><strong>${c.name}</strong><small>${c.rarity} · оценка ${fmt(c.value)} CR</small></div><div style="text-align:right"><strong>${fmt(offer.price)} CR</strong><button class="btn small" onclick="buyMarket(${i})">Купить</button></div></div>`}).join('')||'<div class="empty">Предложений пока нет.</div>';
+ const tasks=[['daily','🎁','Зайди в игру','Получить ежедневную награду · 250 CR',!state.tasks.includes('daily')],['collector','🏁','Начинающий коллекционер','Собери 3 машины · 500 CR',state.owned.length>=3&&!state.tasks.includes('collector')],['rare','💎','Охотник за редкостями','Получи Epic или Legendary · 750 CR',state.owned.some(id=>['Epic','Legendary'].includes(carBy(id).rarity))&&!state.tasks.includes('rare')]];
+ document.getElementById('taskList').innerHTML=tasks.map(t=>`<div class="row-item task"><div class="emoji">${t[1]}</div><div class="details"><strong>${t[2]}</strong><small>${t[3]}</small></div><button class="btn small" ${!t[4]?'disabled style="opacity:.45"':''} onclick="claimTask('${t[0]}',${t[0]==='daily'?250:t[0]==='collector'?500:750})">${state.tasks.includes(t[0])?'Получено':t[4]?'Забрать':'В процессе'}</button></div>`).join('');
+}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.nav button').forEach(b=>b.classList.toggle('active',b.dataset.screen===id));if(id==='tasks')document.getElementById('tasks').classList.add('active');}
+function openCase(){
+ if(state.balance<500){toast('Не хватает CR! Выполни задания.');return}
+ state.balance-=500;
+ const r=Math.random()*100;let rarity=r<60?'Common':r<85?'Rare':r<97?'Epic':'Legendary';
+ const pool=cars.filter(c=>c.rarity===rarity);const c=pool[Math.floor(Math.random()*pool.length)];
+ state.owned.push(c.id);
+ const box=document.getElementById('dropResult');box.className='drop-result show';box.innerHTML=`<div class="eyebrow">НОВОЕ ПОПОЛНЕНИЕ</div><div class="big-car">${c.emoji}</div><h2>${c.name}</h2><p>${c.year} · ${c.rarity}</p><strong>${fmt(c.value)} CR</strong>`;
+ save();toast('Новая машина добавлена в коллекцию!');
+}
+function buyMarket(i){const o=state.market[i];if(!o)return;const c=carBy(o.carId);if(state.balance<o.price){toast('Недостаточно CR');return}state.balance-=o.price;state.owned.push(o.carId);state.market.splice(i,1);save();toast(c.name+' куплена!')}
+function claimTask(id,reward){if(state.tasks.includes(id))return;const eligible=id==='daily'||(id==='collector'&&state.owned.length>=3)||(id==='rare'&&state.owned.some(x=>['Epic','Legendary'].includes(carBy(x).rarity)));if(!eligible){toast('Задание ещё не выполнено');return}state.tasks.push(id);state.balance+=reward;save();toast('Получено '+reward+' CR')}
+const tg=window.Telegram&&window.Telegram.WebApp;if(tg){tg.ready();tg.expand();try{tg.setHeaderColor('#0c0d10');tg.setBackgroundColor('#0c0d10')}catch(e){}}
+render();
+</script>
+</body></html>
